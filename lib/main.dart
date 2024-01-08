@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:swift_cart/screens/auth_ui/sign_in_screen.dart';
+import 'package:swift_cart/screens/auth_ui/sign_up_screen.dart';
 import 'package:swift_cart/screens/auth_ui/splash_screen.dart';
 import 'package:swift_cart/screens/user_panel/main_screen.dart';
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: const SignUpScreen(),
     );
   }
 }
