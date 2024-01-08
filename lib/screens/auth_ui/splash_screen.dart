@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
+import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
 import 'package:swift_cart/screens/user_panel/main_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 
@@ -18,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(const Duration(seconds:3), () {
-      Get.offAll(()=>const MainScreen());
+       Get.offAll(()=>const WelcomeScreen());
     });
     super.initState();
   }
@@ -39,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Container(
                 width: Get.width,
                 alignment: Alignment.center,
-                child: Lottie.asset('assets/images/1.json'),
+                child: Lottie.asset('assets/images/splash-icon.json'),
               ),
             ),
             Container(
