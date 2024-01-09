@@ -4,6 +4,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:swift_cart/controllers/sign_in_cotroller.dart';
+import 'package:swift_cart/screens/auth_ui/forget_password_screen.dart';
 import 'package:swift_cart/screens/auth_ui/sign_up_screen.dart';
 import 'package:swift_cart/screens/user_panel/main_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
@@ -102,11 +103,16 @@ class _SignInScreenState extends State<SignInScreen> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerRight,
-                  child: const Text(
-                    'Forget Password?',
-                    style: TextStyle(
-                      color: AppConstant.appScendoryColor,
-                      fontWeight: FontWeight.bold,
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(()=>const ForgetPasswordScreen());
+                    },
+                    child: const Text(
+                      'Forget Password?',
+                      style: TextStyle(
+                        color: AppConstant.appScendoryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
