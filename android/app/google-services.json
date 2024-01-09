@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "588200815863",
+    "project_id": "swift-cart-3581d",
+    "storage_bucket": "swift-cart-3581d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588200815863:android:b3ffa725d9553097c137f2",
+        "android_client_info": {
+          "package_name": "com.codexia.swift_cart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBaYHT03xYc3CYc2AORALyW87T6nQgr8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

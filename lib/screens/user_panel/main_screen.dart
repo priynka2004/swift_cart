@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 
 class MainScreen extends StatefulWidget {
@@ -15,12 +18,26 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: AppConstant.appScendoryColor,
-          statusBarIconBrightness: Brightness.light
-        ),
+            statusBarColor: AppConstant.appScendoryColor,
+            statusBarIconBrightness: Brightness.light),
         backgroundColor: AppConstant.appMainColor,
         title: Text(AppConstant.appMainName),
         centerTitle: true,
+        actions:  [
+          GestureDetector(
+            onTap: ()async{
+              GoogleSignIn googleSignIn = GoogleSignIn();
+              await googleSignIn.signOut();
+              Get.offAll(()=>const WelcomeScreen());
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.logout,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBUIP8AIh_kX3YHZjPezs7nfSRHX-INaqY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>588200815863</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.codexia.swiftCart.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>swift-cart-3581d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>swift-cart-3581d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:588200815863:ios:b1cacef527db11d8c137f2</string>
+</dict>
+</plist>
