@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -17,20 +18,24 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: AppConstant.appScendoryColor,
             statusBarIconBrightness: Brightness.light),
         backgroundColor: AppConstant.appMainColor,
         title: Text(AppConstant.appMainName),
         centerTitle: true,
-        actions:  [
+        actions: [
           GestureDetector(
-            onTap: ()async{
+            onTap: () async {
               GoogleSignIn googleSignIn = GoogleSignIn();
+              FirebaseAuth auth = FirebaseAuth.instance;
+              await auth.signOut();
               await googleSignIn.signOut();
-              Get.offAll(()=>const WelcomeScreen());
+              Get.offAll(
+                () => const WelcomeScreen(),
+              );
             },
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Icon(
                 Icons.logout,
