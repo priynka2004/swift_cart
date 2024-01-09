@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
+import 'package:swift_cart/widgets/drawer_widget.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,32 +19,22 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: AppConstant.appTextColor,
+        ),
         systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: AppConstant.appScendoryColor,
             statusBarIconBrightness: Brightness.light),
         backgroundColor: AppConstant.appMainColor,
-        title: Text(AppConstant.appMainName),
+        title: Text(
+          AppConstant.appMainName,
+          style: const TextStyle(
+            color: AppConstant.appTextColor,
+          ),
+        ),
         centerTitle: true,
-        actions: [
-          GestureDetector(
-            onTap: () async {
-              GoogleSignIn googleSignIn = GoogleSignIn();
-              FirebaseAuth auth = FirebaseAuth.instance;
-              await auth.signOut();
-              await googleSignIn.signOut();
-              Get.offAll(
-                () => const WelcomeScreen(),
-              );
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.logout,
-              ),
-            ),
-          )
-        ],
       ),
+      drawer: const DrawerWidget(),
     );
   }
 }
