@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:swift_cart/controllers/get_device_token_controller.dart';
 import 'package:swift_cart/models/user_model.dart';
 import 'package:swift_cart/screens/user_panel/main_screen.dart';
 
@@ -12,6 +13,8 @@ class GoogleSignInController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> signInWithGoogle() async {
+    final GetDeviceTokenController getDeviceTokenController=
+        Get.put(GetDeviceTokenController());
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await googleSignIn.signIn();
@@ -33,7 +36,7 @@ class GoogleSignInController extends GetxController {
             email: user.email.toString(),
             phone: user.phoneNumber.toString(),
             userImg: user.photoURL.toString(),
-            userDeviceToken: '',
+            userDeviceToken:getDeviceTokenController.deviceToken.toString(),
             country: '',
             userAddress: '',
             street: '',
