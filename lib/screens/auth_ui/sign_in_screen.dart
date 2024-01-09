@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:swift_cart/controllers/get_user_data_controller.dart';
 import 'package:swift_cart/controllers/sign_in_cotroller.dart';
+import 'package:swift_cart/screens/admin_panel/admin_main_screen.dart';
 import 'package:swift_cart/screens/auth_ui/forget_password_screen.dart';
 import 'package:swift_cart/screens/auth_ui/sign_up_screen.dart';
 import 'package:swift_cart/screens/user_panel/main_screen.dart';
@@ -18,6 +20,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final SignInController signInController = Get.put(SignInController());
+  final GetUserDataController getUserDataController =
+      Get.put(GetUserDataController());
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPassword = TextEditingController();
 
@@ -104,8 +108,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   margin: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
-                    onTap: (){
-                      Get.to(()=>const ForgetPasswordScreen());
+                    onTap: () {
+                      Get.to(() => const ForgetPasswordScreen());
                     },
                     child: const Text(
                       'Forget Password?',
@@ -147,13 +151,32 @@ class _SignInScreenState extends State<SignInScreen> {
                           UserCredential? userCredential =
                               await signInController.signInMethod(
                                   email, password);
+                          var userData =
+                              await getUserDataController.getUserData(
+                            userCredential!.user!.uid,
+                          );
+
                           if (userCredential != null) {
                             if (userCredential.user!.emailVerified) {
-                              Get.snackbar("Success", "login Successfully",
-                                snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: AppConstant.appScendoryColor,
-                                colorText: AppConstant.appTextColor,);
-                              Get.offAll(()=>const MainScreen());
+                             if(userData[0]['isAdmin']==true){
+                               Get.snackbar(
+                                 "Success Admin Login",
+                                 "login Successfully",
+                                 snackPosition: SnackPosition.BOTTOM,
+                                 backgroundColor: AppConstant.appScendoryColor,
+                                 colorText: AppConstant.appTextColor,
+                               );
+                               Get.offAll(()=>const AdminMainScreen());
+                             }else{
+                               Get.offAll(()=>const MainScreen());
+                               Get.snackbar(
+                                 "Success User Login",
+                                 "login Successfully",
+                                 snackPosition: SnackPosition.BOTTOM,
+                                 backgroundColor: AppConstant.appScendoryColor,
+                                 colorText: AppConstant.appTextColor,
+                               );
+                             }
                             } else {
                               Get.snackbar(
                                 "Error",
@@ -163,7 +186,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 colorText: AppConstant.appTextColor,
                               );
                             }
-                          }else{
+                          } else {
                             Get.snackbar(
                               "Error",
                               "Please try again",
