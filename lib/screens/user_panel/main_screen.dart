@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
+import 'package:swift_cart/widgets/banner_widget.dart';
 import 'package:swift_cart/widgets/drawer_widget.dart';
 
 class MainScreen extends StatefulWidget {
@@ -35,6 +36,19 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
       ),
       drawer: const DrawerWidget(),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(
+                height: Get.height / 90.0,
+              ),
+              const BannerWidget(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
