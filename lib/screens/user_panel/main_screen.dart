@@ -4,10 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
+import 'package:swift_cart/screens/user_panel/all_categories_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 import 'package:swift_cart/widgets/banner_widget.dart';
 import 'package:swift_cart/widgets/category_widget.dart';
 import 'package:swift_cart/widgets/drawer_widget.dart';
+import 'package:swift_cart/widgets/flash_sale_widget.dart';
 import 'package:swift_cart/widgets/heading_widget.dart';
 
 class MainScreen extends StatefulWidget {
@@ -57,9 +59,12 @@ class _MainScreenState extends State<MainScreen> {
               HeadingWidget(
                 headingTitle: 'Flash Sale',
                 headingSubTitle: 'According to your budget',
-                onTap: () {},
+                onTap: () => Get.to(
+                  () => const AllCategoriesScreen(),
+                ),
                 buttonText: 'See More >',
               ),
+              const FlashSaleWidget(),
             ],
           ),
         ),
