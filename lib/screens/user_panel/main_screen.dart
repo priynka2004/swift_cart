@@ -7,6 +7,7 @@ import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 import 'package:swift_cart/widgets/banner_widget.dart';
 import 'package:swift_cart/widgets/drawer_widget.dart';
+import 'package:swift_cart/widgets/heading_widget.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -45,6 +46,18 @@ class _MainScreenState extends State<MainScreen> {
                 height: Get.height / 90.0,
               ),
               const BannerWidget(),
+              HeadingWidget(
+                headingTitle: 'Category',
+                headingSubTitle: 'According to your budget',
+                onTap: () {},
+                buttonText: 'See More >',
+              ),
+              HeadingWidget(
+                headingTitle: 'Flash Sale',
+                headingSubTitle: 'According to your budget',
+                onTap: () {},
+                buttonText: 'See More >',
+              ),
             ],
           ),
         ),
