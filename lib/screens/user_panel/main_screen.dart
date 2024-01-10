@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 import 'package:swift_cart/widgets/banner_widget.dart';
+import 'package:swift_cart/widgets/category_widget.dart';
 import 'package:swift_cart/widgets/drawer_widget.dart';
 import 'package:swift_cart/widgets/heading_widget.dart';
 
@@ -52,6 +53,7 @@ class _MainScreenState extends State<MainScreen> {
                 onTap: () {},
                 buttonText: 'See More >',
               ),
+              const CategoriesWidget(),
               HeadingWidget(
                 headingTitle: 'Flash Sale',
                 headingSubTitle: 'According to your budget',
