@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swift_cart/models/cart_model.dart';
 import 'package:swift_cart/models/product_model.dart';
+import 'package:swift_cart/screens/user_panel/cart_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -33,11 +34,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         actions: [
           GestureDetector(
+            onTap:()=>Get.to(()=>const CartScreen()),
             child: const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.shopping_cart,
-              ),
+              child: Icon(Icons.shopping_cart),
             ),
           ),
         ],
