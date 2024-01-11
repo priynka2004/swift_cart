@@ -106,7 +106,7 @@ class _CartScreenState extends State<CartScreen> {
                               NetworkImage(cartModel.productImages[0]),
                         ),
                         title: Text(cartModel.productName),
-                        subtitle: (Row(
+                        subtitle: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(cartModel.productTotalPrice.toString()),
@@ -115,35 +115,8 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                if (cartModel.productQuantity > 0) {
-                                  FirebaseFirestore.instance
-                                      .collection('cart')
-                                      .doc(user!.uid)
-                                      .collection('cartOrders')
-                                      .doc(cartModel.productId)
-                                      .update({
-                                    'productQuantity':
-                                    cartModel.productQuantity + 1,
-                                    'productTotalPrice': (
-                                    double.parse(cartModel.fullPrice) *
-                                        (cartModel.productQuantity),
-                                    )
-                                  });
-                                }
-                              },
-                              child: const CircleAvatar(
-                                radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('+'),
-                              ),
-                            ),
-                            SizedBox(
-                              width: Get.width / 20.0,
-                            ),
-                            GestureDetector(
-                              onTap: () async {
                                 if (cartModel.productQuantity > 1) {
-                                  FirebaseFirestore.instance
+                                  await FirebaseFirestore.instance
                                       .collection('cart')
                                       .doc(user!.uid)
                                       .collection('cartOrders')
@@ -151,21 +124,84 @@ class _CartScreenState extends State<CartScreen> {
                                       .update({
                                     'productQuantity':
                                         cartModel.productQuantity - 1,
-                                    'productTotalPrice': (
-                                      double.parse(cartModel.fullPrice) *
-                                          (cartModel.productQuantity - 1),
-                                    )
+                                    'productTotalPrice':
+                                        (double.parse(cartModel.fullPrice) *
+                                            (cartModel.productQuantity - 1))
                                   });
                                 }
                               },
-                              child: const CircleAvatar(
-                                radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('-'),
+                              child: GestureDetector(
+                                onTap: () async {
+                                  if (cartModel.productQuantity > 1) {
+                                    await FirebaseFirestore.instance
+                                        .collection('cart')
+                                        .doc(user!.uid)
+                                        .collection('cartOrders')
+                                        .doc(cartModel.productId)
+                                        .update({
+                                      'productQuantity':
+                                          cartModel.productQuantity - 1,
+                                      'productTotalPrice':
+                                          (double.parse(cartModel.fullPrice) *
+                                              (cartModel.productQuantity - 1))
+                                    });
+                                  }
+                                },
+                                child: const CircleAvatar(
+                                  radius: 14.0,
+                                  backgroundColor: AppConstant.appMainColor,
+                                  child: Text('-'),
+                                ),
                               ),
                             ),
+                            SizedBox(
+                              width: Get.width / 20.0,
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                if (cartModel.productQuantity > 0) {
+                                  await FirebaseFirestore.instance
+                                      .collection('cart')
+                                      .doc(user!.uid)
+                                      .collection('cartOrders')
+                                      .doc(cartModel.productId)
+                                      .update({
+                                    'productQuantity':
+                                        cartModel.productQuantity + 1,
+                                    'productTotalPrice':
+                                        double.parse(cartModel.fullPrice) +
+                                            double.parse(cartModel.fullPrice) *
+                                                (cartModel.productQuantity),
+                                  });
+                                }
+                              },
+                              child: GestureDetector(
+                                onTap: () async {
+                                  if (cartModel.productQuantity > 0) {
+                                    await FirebaseFirestore.instance
+                                        .collection('cart')
+                                        .doc(user!.uid)
+                                        .collection('cartOrders')
+                                        .doc(cartModel.productId)
+                                        .update({
+                                      'productQuantity':
+                                          cartModel.productQuantity + 1,
+                                      'productTotalPrice': double.parse(
+                                              cartModel.fullPrice) +
+                                          double.parse(cartModel.fullPrice) *
+                                              (cartModel.productQuantity)
+                                    });
+                                  }
+                                },
+                                child: const CircleAvatar(
+                                  radius: 14.0,
+                                  backgroundColor: AppConstant.appMainColor,
+                                  child: Text('+'),
+                                ),
+                              ),
+                            )
                           ],
-                        )),
+                        ),
                       ),
                     ),
                   );
