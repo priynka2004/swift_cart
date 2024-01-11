@@ -6,6 +6,7 @@ import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:swift_cart/controllers/product_price_controller.dart';
 import 'package:swift_cart/models/cart_model.dart';
+import 'package:swift_cart/screens/user_panel/checkout_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 
 class CartScreen extends StatefulWidget {
@@ -79,6 +80,7 @@ class _CartScreenState extends State<CartScreen> {
                     productTotalPrice: double.parse(
                         productData['productTotalPrice'].toString()),
                   );
+                  productPriceController.fetchProductPrice();
                   return SwipeActionCell(
                     key: ObjectKey(cartModel.productId),
                     trailingActions: [
@@ -240,7 +242,9 @@ class _CartScreenState extends State<CartScreen> {
                       "Checkout",
                       style: TextStyle(color: AppConstant.appTextColor),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(()=>const CheckOutScreen());
+                    },
                   ),
                 ),
               ),
