@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
+import 'package:swift_cart/screens/user_panel/all_orders_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -57,22 +58,26 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               thickness: 1.5,
               color: Colors.grey,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
-                title: Text(
+                title: const Text(
                   "Home",
                   style: TextStyle(color: AppConstant.appTextColor),
                 ),
-                leading: Icon(
+                leading: const Icon(
                   Icons.home,
                   color: AppConstant.appTextColor,
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.arrow_forward,
                   color: AppConstant.appTextColor,
                 ),
+                onTap: (){
+                  Get.back();
+                  Get.to(()=>const AllOrdersScreen());
+                },
               ),
             ),
             const Padding(
