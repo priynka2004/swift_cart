@@ -9,6 +9,7 @@ import 'package:swift_cart/models/cart_model.dart';
 import 'package:swift_cart/models/product_model.dart';
 import 'package:swift_cart/screens/user_panel/cart_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   ProductModel productModel;
@@ -155,7 +156,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   style: TextStyle(
                                       color: AppConstant.appTextColor),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  sendMessageOnWhatsApp(
+                                    productModel: widget.productModel,
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -193,6 +198,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
       ),
     );
+  }
+
+
+  static Future<void> sendMessageOnWhatsApp({
+    required ProductModel productModel,
+  }) async {
+    const number = "+91 6350508030";
+    final message =
+        "Hello Codexia \n i want to know about this product \n ${productModel.productName} \n ${productModel.productId}";
+
+    final url = 'https://wa.me/$number?text=${Uri.encodeComponent(message)}';
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Future<void> checkProductExistence({
