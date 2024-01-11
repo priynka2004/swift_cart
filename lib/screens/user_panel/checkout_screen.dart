@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
+import 'package:swift_cart/controllers/get_customer_device_token_controller.dart';
 import 'package:swift_cart/controllers/product_price_controller.dart';
 import 'package:swift_cart/models/cart_model.dart';
+import 'package:swift_cart/services/place_order_service.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 
 class CheckOutScreen extends StatefulWidget {
@@ -248,6 +250,24 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 ),
                 onPressed: () async {
+                  if (nameController.text != '' &&
+                      phoneController.text != '' &&
+                      addressController.text != '') {
+                    String name = nameController.text.trim();
+                    String phone = phoneController.text.trim();
+                    String address = addressController.text.trim();
+                   String customerToken = await getCustomerDeviceToken();
+
+                    placeOrder(
+                      context: context,
+                      customerName: name,
+                      customerPhone: phone,
+                      customerAddress: address,
+                      customerDeviceToken: customerToken,
+                    );
+                  } else {
+                    print("Fill The Details");
+                  }
                 },
                 child: const Text(
                   "Place Order",
