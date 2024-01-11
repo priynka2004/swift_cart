@@ -7,6 +7,7 @@ import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
 import 'package:swift_cart/screens/user_panel/all_categories_screen.dart';
 import 'package:swift_cart/screens/user_panel/all_flash_sale_product_screen.dart';
 import 'package:swift_cart/screens/user_panel/all_products_screen.dart';
+import 'package:swift_cart/screens/user_panel/cart_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 import 'package:swift_cart/widgets/all_products_widget.dart';
 import 'package:swift_cart/widgets/banner_widget.dart';
@@ -41,6 +42,15 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         centerTitle: true,
+        actions:[
+          GestureDetector(
+            onTap:()=>Get.to(()=>const CartScreen()),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.shopping_cart),
+            ),
+          ),
+        ],
       ),
       drawer: const DrawerWidget(),
       body: SingleChildScrollView(
