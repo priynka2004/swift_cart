@@ -5,7 +5,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:swift_cart/screens/auth_ui/welcome_screen.dart';
 import 'package:swift_cart/utils/app_constant.dart';
 
-
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
 
