@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:swift_cart/controllers/product_price_controller.dart';
 import 'package:swift_cart/models/cart_model.dart';
@@ -17,7 +18,8 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   final ProductPriceController productPriceController =
-  Get.put(ProductPriceController());
+      Get.put(ProductPriceController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +79,58 @@ class _CartScreenState extends State<CartScreen> {
                     productTotalPrice: double.parse(
                         productData['productTotalPrice'].toString()),
                   );
+                  return SwipeActionCell(
+                    key: ObjectKey(cartModel.productId),
+                    trailingActions: [
+                      SwipeAction(
+                          title: "Delete",
+                          forceAlignmentToBoundary: true,
+                          performsFirstActionWithFullSwipe: true,
+                          onTap: (CompletionHandler handler)async{
+                            print("deleted");
+                        await FirebaseFirestore.instance
+                                .collection('cart')
+                                .doc(user!.uid)
+                                .collection('cartOrders')
+                                .doc(cartModel.productId)
+                                .delete();
+                          })
+                    ],
+                    child: Card(
+                      elevation: 5,
+                      color: AppConstant.appTextColor,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: AppConstant.appMainColor,
+                          backgroundImage:
+                              NetworkImage(cartModel.productImages[0]),
+                        ),
+                        title: Text(cartModel.productName),
+                        subtitle: (Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(cartModel.productTotalPrice.toString()),
+                            SizedBox(
+                              width: Get.width / 20.0,
+                            ),
+                            const CircleAvatar(
+                              radius: 14.0,
+                              backgroundColor: AppConstant.appMainColor,
+                              child: Text('+'),
+                            ),
+                            SizedBox(
+                              width: Get.width / 20.0,
+                            ),
+                            const CircleAvatar(
+                              radius: 14.0,
+                              backgroundColor: AppConstant.appMainColor,
+                              child: Text('-'),
+                            ),
+                          ],
+                        )),
+                      ),
+                    ),
+                  );
                   productPriceController.fetchProductPrice();
                 },
               ),
@@ -92,7 +146,7 @@ class _CartScreenState extends State<CartScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Obx(
-                  () => Text(
+              () => Text(
                 " Total ${productPriceController.totalPrice.value.toStringAsFixed(1)} : PKR",
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -112,9 +166,7 @@ class _CartScreenState extends State<CartScreen> {
                       "Checkout",
                       style: TextStyle(color: AppConstant.appTextColor),
                     ),
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                   ),
                 ),
               ),
